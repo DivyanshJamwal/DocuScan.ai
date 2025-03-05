@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Scan - DocuScan</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>Upload a Document (Admin)</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="POST" action="/admin/scan" enctype="multipart/form-data">
+        <div>
+            <label for="document">Select a .txt file:</label>
+            <input type="file" id="document" name="document" accept=".txt" required>
+        </div>
+        <button type="submit">Upload</button>
+    </form>
+    <p><a href="/admin/dashboard">Back to Dashboard</a> | <a href="/logout">Logout</a></p>
+</body>
+</html>

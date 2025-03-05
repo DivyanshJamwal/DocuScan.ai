@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Document - DocuScan</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>Upload a Document</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <p><strong>Remaining Credits:</strong> {{ credits }}</p>
+    <form method="POST" action="/user/scan" enctype="multipart/form-data">
+        <div>
+            <label for="document">Select a .txt file:</label>
+            <input type="file" id="document" name="document" accept=".txt" required>
+        </div>
+        <button type="submit">Upload and Scan</button>
+    </form>
+    <p><a href="/user/profile">Back to Profile</a> | <a href="/logout">Logout</a></p>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - DocuScan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="system-dashboard">
+        <h1>System Control Hub</h1>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Users</h3>
+                <p class="stat-number">{{ user_count }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Pending Requests</h3>
+                <p class="stat-number">{{ pending_requests }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Credits Approved</h3>
+                <p class="stat-number">{{ total_credits_approved }}</p>
+            </div>
+        </div>
+
+        <div class="panel-grid">
+            <div class="panel">
+                <h2>Recent Scans (24h)</h2>
+                {% if scans_per_user %}
+                    <table>
+                        <tr><th>Username</th><th>Scans</th></tr>
+                        {% for user in scans_per_user %}
+                            <tr><td>{{ user[0] }}</td><td>{{ user[1] }}</td></tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p class="no-data">No scans in the last 24 hours.</p>
+                {% endif %}
+            </div>
+            <div class="panel">
+                <h2>Top Keywords</h2>
+                {% if common_topics %}
+                    <ul>
+                        {% for topic in common_topics %}
+                            <li>{{ topic }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="no-data">No documents uploaded yet.</p>
+                {% endif %}
+            </div>
+            <div class="panel">
+                <h2>Top Users</h2>
+                {% if top_users %}
+                    <table>
+                        <tr><th>Username</th><th>Total Scans</th></tr>
+                        {% for user in top_users %}
+                            <tr><td>{{ user[0] }}</td><td>{{ user[1] }}</td></tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p class="no-data">No user scans yet.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <p class="nav-links">
+            <a href="/admin/scan">Upload Document</a>
+            <a href="/admin/manage_credits">Manage Credits</a>
+            <a href="/logout">Logout</a>
+        </p>
+    </div>
+</body>
+</html>

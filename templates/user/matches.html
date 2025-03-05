@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Documents - DocuScan</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>Matching Documents</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% if matches %}
+        <table>
+            <tr>
+                <th>Filename</th>
+                <th>Similarity (%)</th>
+            </tr>
+            {% for match in matches %}
+                <tr>
+                    <td>{{ match.filename }}</td>
+                    <td>{{ "%.2f" % match.similarity }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No similar documents found.</p>
+    {% endif %}
+    <p><a href="/user/scan">Scan Another Document</a> | <a href="/user/profile">Back to Profile</a> | <a href="/logout">Logout</a></p>
+</body>
+</html>

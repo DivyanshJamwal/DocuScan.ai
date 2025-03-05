@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - DocuScan</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>Your Profile</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <p><strong>Username:</strong> {{ username }}</p>
+    <p><strong>Credits:</strong> {{ credits }}</p>
+    <p><strong>Total Scans:</strong> {{ scan_count }}</p>
+    <p><a href="/user/scan">Scan a Document</a></p>
+    <p><a href="/user/request_credits">Request More Credits</a></p>
+    <p><a href="/user/export_history">Export Scan History</a></p>
+    <p><a href="/logout">Logout</a></p>
+</body>
+</html>

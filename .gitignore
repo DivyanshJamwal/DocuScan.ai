@@ -1,0 +1,25 @@
+# Database files
+database.db
+
+# Uploaded files
+uploads/
+
+# Logs
+logs/
+
+# Python cache and env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.egg-info/
+
+# OS and editor files
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/

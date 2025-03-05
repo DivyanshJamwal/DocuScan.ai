@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Credits - DocuScan</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>Manage Credit Requests</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% if requests %}
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Requested Credits</th>
+                <th>Timestamp</th>
+                <th>Action</th>
+            </tr>
+            {% for request in requests %}
+                <tr>
+                    <td>{{ request[1] }}</td>
+                    <td>{{ request[2] }}</td>
+                    <td>{{ request[3] }}</td>
+                    <td>
+                        <form method="POST" action="/admin/manage_credits" style="display:inline;">
+                            <input type="hidden" name="request_id" value="{{ request[0] }}">
+                            <button type="submit" name="action" value="approve">Approve</button>
+                            <button type="submit" name="action" value="deny">Deny</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No pending credit requests.</p>
+    {% endif %}
+    <p><a href="/admin/dashboard">Back to Dashboard</a> | <a href="/logout">Logout</a></p>
+</body>
+</html>
