@@ -59,7 +59,7 @@ Follow these steps to get DocuScan running locally:
 
 ### Step 1: Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/DivyanshJamwal/DocuScan.ai.git
 ```
 ### Step 2: Change the Directory
 ```bash
