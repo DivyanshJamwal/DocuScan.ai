@@ -60,6 +60,15 @@ Follow these steps to get DocuScan running locally:
 ### Step 1: Clone the Repository
 ```bash
 git clone <repository-url>
+```
+### Step 2: Change the Directory
+```bash
 cd DocuScan
+```
+### Step 3: Install the dependencies
+```bash
 pip install flask requests
+```
+### Step 4: Run the file
+```bash
 python app.py
